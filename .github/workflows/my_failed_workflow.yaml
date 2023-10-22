@@ -1,0 +1,61 @@
+name: My failed workflow
+on: 
+    push:
+        tags: 
+          - v[0-9].[0-9]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:    
+    #echo "message: $nowmessage"，返回当前获取的message
+    #条件语句，判断有没有NORUN
+    #fi是结束if语句
+        - 
+            name: Checkout
+            uses: actions/checkout@v4
+        -
+            name: Check commit message
+            run: |
+                nowmessage=$(git log -1 --pretty=%B)
+                if [[ $nowmessage == "#NORUN"* ]]; then
+                    exit 1
+                fi
+
+        #Scan the code base for vulnerabilities
+        -
+            name: Checkout code
+            uses: actions/checkout@v3
+        -
+            name: Run Trivy vulnerability scanner in repo mode
+            uses: aquasecurity/trivy-action@master
+            with:
+              scan-type: 'fs'
+              ignore-unfixed: true
+              format: 'table'
+              output: 'trivy-results.txt'
+              severity: 'HIGH'
+        -
+            name: see the table
+            run:
+                cat trivy-results.txt
+#send a message to the provided Slack channel
+        - 
+            name: Slack Notification
+            uses: rtCamp/action-slack-notify@v2
+            env:
+              SLACK_CHANNEL: cawork
+              SLACK_MESSAGE: Failed trivy scan, see uploaded report
+              SLACK_TITLE: Scan failed - Fred
+              SLACK_USERNAME: DipSA 57 CICD
+              SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#Upload scan report
+        -
+            name: Upload scan report
+            uses: MeilCli/slack-upload-file@v3
+            with:
+              slack_token: ${{ secrets.SLACK_TOKEN }}
+              channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+              file_path: 'trivy-results.txt'
+              initial_comment: 'The scan report post by Chen Jia'
