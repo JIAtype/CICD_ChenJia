@@ -36,7 +36,7 @@ jobs:
         -
             name: see the table
             run:
-                cat trivy-results.table
+                cat trivy-results.txt
 #Containerized the Golang application
 #Push the image to Docker Hub
         -
