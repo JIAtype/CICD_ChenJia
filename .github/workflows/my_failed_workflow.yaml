@@ -1,6 +1,8 @@
 name: My failed workflow
 on: 
     push:
+        branches:
+          - failed
         tags: 
           - v[0-9].[0-9]
 
