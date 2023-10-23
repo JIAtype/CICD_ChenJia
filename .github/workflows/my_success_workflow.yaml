@@ -16,7 +16,7 @@ jobs:
             name: Check commit message
             run: |
                 nowmessage=$(git log -1 --pretty=%B)
-                if [[ $nowmessage == "#NORUN"* ]]; then
+                if [[ $nowmessage == *"#NORUN"* ]]; then
                     exit 1
                 fi
 
