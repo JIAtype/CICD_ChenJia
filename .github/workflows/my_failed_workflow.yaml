@@ -59,3 +59,4 @@ jobs:
               channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
               file_path: 'trivy-results.txt'
               initial_comment: 'The scan report post by Chen Jia'
+              
