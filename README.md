@@ -1,3 +1,6 @@
+branch v1.0 for failed workflow
+branch v2.0 for success workflow
+
 ## Command line options
 
 | Option    | Description                        | Default       |
