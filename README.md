@@ -1,3 +1,8 @@
+failed branch and tage v1 for the failed workflow
+success branch and tage v2 for the success workflow
+
+
+
 ## Command line options
 
 | Option    | Description                        | Default       |
