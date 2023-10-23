@@ -80,3 +80,18 @@ jobs:
               TAGS: user1051006/mydoc:${{github.sha}}
               COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
               COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+#send a message to the provided Slack channel
+        - 
+            name: Slack Notification
+            uses: rtCamp/action-slack-notify@v2
+            env:
+              SLACK_CHANNEL: cawork
+              SLACK_MESSAGE: | 
+                Name: CHEN JIA
+                Matriculation number: A0285998W 
+                Email:e1221810@u.nus.edu
+                Git: https://github.com/JIAtype/CICD_ChenJia
+                Image: https://hub.docker.com/repository/docker/user1051006/mydoc
+              SLACK_TITLE: Image build and signed
+              SLACK_USERNAME: DipSA 57 CICD
+              SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
