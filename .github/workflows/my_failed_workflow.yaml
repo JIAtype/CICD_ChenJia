@@ -45,7 +45,7 @@ jobs:
             name: Slack Notification
             uses: rtCamp/action-slack-notify@v2
             env:
-              SLACK_CHANNEL: submission
+              SLACK_CHANNEL: cawork
               SLACK_MESSAGE: Failed trivy scan, see uploaded report
               SLACK_TITLE: Scan failed - Fred
               SLACK_USERNAME: DipSA 57 CICD
