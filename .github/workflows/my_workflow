@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    if: ${{!contains(github.event.commits[0].message,*'#NORUN')}}
     steps:    
     #echo "message: $nowmessage"，返回当前获取的message
     #条件语句，判断有没有NORUN
